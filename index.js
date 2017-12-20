@@ -9,6 +9,21 @@ app.use(express.static(path.join(__dirname,'')))
 app.get('/',(req,res)=>{
 res.sendfile(path.join(__dirname,'index.html'))
 })
+//Show progress status
+app.get('/api/ps',(req,res)=>{
+  exec('ps -la',(err,stout,sterr)=>{
+  if(err){
+  console.error("ps err:"+err);
+}
+if(stout){
+
+res.send(stout);
+}else{
+res.send(sterr);
+}
+
+})
+})
 
 app.get('/api/ls',(req,res)=>{
 exec('echo "User:${USER}"',(error,stdout,stderr)=>{
