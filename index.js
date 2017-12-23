@@ -11,34 +11,31 @@ res.sendfile(path.join(__dirname,'index.html'))
 })
 //Show progress status
 app.get('/api/ps',(req,res)=>{
-  exec('ps -la',(err,stout,sterr)=>{
-  if(err){
-  console.error("ps err:"+err);
-}
-if(stout){
-
-res.send(stout);
-}else{
-res.send(sterr);
-}
-
+  exec('ps -la',(err,stdout,stderr)=>{
+  res.send(callback(err,stdout,stderr));
 })
 })
-
-app.get('/api/ls',(req,res)=>{
+//Show current OS user
+app.get('/api/user',(req,res)=>{
 exec('echo "User:${USER}"',(error,stdout,stderr)=>{
-if(error){
-console.error('exec error:${error}')
-return;
-}
-if(stdout){
-res.send('stdout:'+stdout.replace('User','').trim());
-}
-if(stderr){
-res.send('stderr:'+stderr);
-}
+ res.send(callback(error,stdout,stderr));
+})
+})
+//Show current directory of file
+app.get('/api/ls',(req,res)=>{
+ exec('ls -a',(error,stdout,stderr)=>{
+ res.send(callback(error,stdout,stderr));
 })
 })
 app.listen(8080,()=>{
 console.log("Server is running on port: 8080")
 })
+
+function callback(err,stdout,sterr,spar="\n"){
+if(err){
+console.err('exec errpr:'+err)
+}
+if(stdout){
+return {"flag":"success","data":(stdout.trim()).split(spar)};
+}
+}
