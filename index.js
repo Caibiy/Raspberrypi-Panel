@@ -11,20 +11,20 @@ res.sendfile(path.join(__dirname,'index.html'))
 })
 //Show progress status
 app.get('/api/ps',(req,res)=>{
-  exec('ps -la',(err,stdout,stderr)=>{
-  res.send(callback(err,stdout,stderr));
+  exec('sh ./bash/ps.sh',(err,stdout,stderr)=>{
+  res.json(callback(err,stdout,stderr));
 })
 })
 //Show current OS user
 app.get('/api/user',(req,res)=>{
-exec('echo "User:${USER}"',(error,stdout,stderr)=>{
- res.send(callback(error,stdout,stderr));
+exec('sh ./bash/user.sh',(error,stdout,stderr)=>{
+ res.json(callback(error,stdout,stderr));
 })
 })
 //Show current directory of file
 app.get('/api/ls',(req,res)=>{
- exec('ls -a',(error,stdout,stderr)=>{
- res.send(callback(error,stdout,stderr));
+ exec('sh ./bash/ls.sh',(error,stdout,stderr)=>{
+ res.json(callback(error,stdout,stderr));
 })
 })
 app.listen(8080,()=>{

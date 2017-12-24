@@ -1,2 +1,2 @@
-#!/bin/sh
-echo "User:${USER}"
+#! /bin/sh
+ls -a
