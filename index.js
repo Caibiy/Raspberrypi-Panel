@@ -27,15 +27,34 @@ app.get('/api/ls',(req,res)=>{
  res.json(callback(error,stdout,stderr));
 })
 })
+//Show Dir status
+app.get('/api/dstatus',(req,res)=>{
+exec('bash ./bash/dstatus.sh',(error,stdout,stderr)=>{
+  res.json(callback(error,stdout,stderr));
+})
+})
+//显示文件在磁盘中的占用率
+app.get('/api/fstatus',(req,res)=>{
+if(req.query){
+exec("sh ./bash/fstatus.sh "+req.query.file,(error,stdout,stderr)=>{
+res.json(callback(error,stdout,stderr));
+})
+}else{
+res.json({"eror":"没有传递参数"})
+}
+})
 app.listen(8080,()=>{
 console.log("Server is running on port: 8080")
 })
 
-function callback(err,stdout,sterr,spar="\n"){
+function callback(err,stdout,stderr,spar="\n"){
 if(err){
-console.err('exec errpr:'+err)
+return {"exec error":err}
 }
 if(stdout){
 return {"flag":"success","data":(stdout.trim()).split(spar)};
+}
+if(stderr){
+return {"flag":"error"}
 }
 }
