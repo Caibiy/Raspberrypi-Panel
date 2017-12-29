@@ -3,10 +3,17 @@
 <head>
 <meta charset="utf-8"/>
 <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+<style type="text/css" rel="stylesheet" >
+ul li{
+margin-top:8px;
+}
+
+</style>
 </head>
 <body>
 <div class="container">
 <h3 style="color:pink">Some Bash Shell Pratice</h3>
+<hr>
 <a class="btn btn-primary btn-sm" href="/api/user">显示当前操作系统用户</a>
 <a class="btn btn-info btn-sm" href="/api/ps">显示当前进程情况</a>
 <a class="btn btn-danger btn-sm" href="/api/ls">显示当前的所有文件</a>
@@ -24,6 +31,14 @@
 </tr>
 </table>
 </form>
+<h3>文本的基本操作</h3>
+<hr>
+<ul style="list-style:none">
+<li><a href="/api/rm" class="btn btn-danger btn-sm">删除文件</a></li>
+<li><a href="/api/head" class="btn btn-info btn-sm">可以使用空格来滚动查看</a></li>
+<li><a href="/api/less" class="btn btn-success btn-sm">可以使用上下滚动查看文件</a></li>
+<li><a href="/api/cat" class="btn btn-info btn-sm">查看文件打印到标准输出</a></li>
+</ul>
 </div>
 
 </body>

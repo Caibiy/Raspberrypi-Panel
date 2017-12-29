@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const bodyParser = require('body-parser')
-const { exec } = require('child_process');
+const { exec } = require('child_process')
+const pug = require('pug')
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
 
@@ -18,7 +19,7 @@ app.get('/api/ps',(req,res)=>{
 //Show current OS user
 app.get('/api/user',(req,res)=>{
 exec('sh ./bash/user.sh',(error,stdout,stderr)=>{
- res.json(callback(error,stdout,stderr));
+    res.send(pug.renderFile("./view/user.pug",callback(error,stdout,stderr)))
 })
 })
 //Show current directory of file
