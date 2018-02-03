@@ -2,11 +2,19 @@
 path=/etc/wpa_supplicant/wpa_supplicant.conf
 wifiname=$1
 wifipass=$2
+#写入配置
 write_wifi(){
      echo "network={
 ssid=\"${wifiname}\"
 psk=\"${wifipass}\"
 }" >>$path
+}
+
+#检查配置
+read_wifi(){
+  echo "读取配置信息"
+  cat $path | grep ssid
+
 }
 if [ -e $path ];then
    if [ -n $wifiname ] && [ -n $wifipass ];then
