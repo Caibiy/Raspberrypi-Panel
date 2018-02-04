@@ -16,8 +16,9 @@ read_wifi(){
   cat $path | grep ssid
 
 }
+trap "echo Goodbye...." EXIT
 if [ -e $path ];then
-   if [ -n $wifiname ] && [ -n $wifipass ];then
+   if [ !-z $wifiname ] && [! -z $wifipass ];then
       echo "正在写入配置....."
       echo "wifi名字:$wifiname,wifi密码$wifipass"
       write_wifi
