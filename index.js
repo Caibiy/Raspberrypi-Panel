@@ -6,7 +6,10 @@ const { exec } = require('child_process')
 const pug = require('pug')
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
-
+//api design
+app.post('/api/user',(req,res)=>{
+ res.json({user:"root"});
+})
 app.get('/',(req,res)=>{
 res.sendfile(path.join(__dirname,'index.html'))
 })

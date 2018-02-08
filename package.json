@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "nodemon": "^1.13.3",
-    "pug": "^2.0.0-rc.4"
+    "pug": "^2.0.0-rc.4",
+    "sweetalert2": "^7.10.0"
   }
 }
