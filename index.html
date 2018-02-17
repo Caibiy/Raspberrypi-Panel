@@ -58,9 +58,18 @@ $(_).addClass('current');
           $('.panel').removeClass('panel_current')
           $('#wifi_panel').addClass('panel_current')
          }else if ("magic"==result.flag){
-      
+        if($('#panels').children('.panel').hasClass('panel_current')){
+        /* -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -ms-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;*/
+        $('.panel_current').css('transition','opacity 0.5s ease-in-out');
+        setTimeout(function(){
+          $('.panel').removeClass('panel_current')
+        },500);
+}
          }else if ("bluetooth"==result.flag){
- 	 
+          $('.panel').removeClass('panel_current')
   	 } 
             
 
@@ -158,12 +167,14 @@ $(_).addClass('current');
                                </a>
                                 </div>
 </div>
+                 <div id="panels">
                       <div class="panel"  id="wifi_panel">
                         <ul>
                           <li>您当前的wifi状态为:</li>
                           <li>可用的wifi列表如下:</li>
                         </ul>
                       </div>
+                 </div> 
 </div>
 <nav class="nav">
 						<a class="item" href="https://github.com/caibiy"><span>About me</span></a>

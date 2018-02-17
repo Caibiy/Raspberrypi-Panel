@@ -264,29 +264,47 @@ color:#fff;
 .content-item a.current i{
 color:#fff!important;
 }
-div.content-animate{
-animation-duration:3s;
-animation-name:fade;
-}
-@keyframes fade{
+@keyframes fade-in{
   0%{
    opacity:0; 
   }
   50%{
- opacity:0;
+ opacity:0.5;
  }
   100%{
    opacity:1;
   }
 }
+@-webkit-keyframes fade-in {/*针对webkit内核*/  
+    0% {opacity: 0;}  
+    40% {opacity: 0.5;}  
+    100% {opacity: 1;}  
+} 
+@keyframes fade-out{
+   0%{
+    opacity:1;
+   }
+   50%{
+   opacity:0.5;
+  }
+  100%{
+  opacity:0;
+  }
+}
+.fade-out{
+ animation:fade-out;
+ animation-duration:0.5s;
+} 
 .panel_current{
  display:block!important; 
+ animation:fade-in;
+ animation-duration:0.5s;
 }
 #wifi_panel{
 display:none;
 margin-top:16px;
 }
-.wifi_panel ul{
+#wifi_panel ul{
 list-style:none
 }
 /*End*/
