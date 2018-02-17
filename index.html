@@ -50,12 +50,21 @@ $(_).addClass('current');
      {
        type:"post",
        data:{flag:flag},
-       url:"/api/user",
+       url:"/api/config",
        success:function(result){
-         if(result){
-          swal('Fuck yourself!')              
-          }
-                     
+         if(result && result.flag){
+         // swal('Fuck yourself!') 
+         if( "wifi"==result.flag){
+          $('.panel').removeClass('panel_current')
+          $('#wifi_panel').addClass('panel_current')
+         }else if ("magic"==result.flag){
+      
+         }else if ("bluetooth"==result.flag){
+ 	 
+  	 } 
+            
+
+      }
        }
      }) 
 })
@@ -149,7 +158,7 @@ $(_).addClass('current');
                                </a>
                                 </div>
 </div>
-                      <div class="content-panel">
+                      <div class="panel"  id="wifi_panel">
                         <ul>
                           <li>您当前的wifi状态为:</li>
                           <li>可用的wifi列表如下:</li>

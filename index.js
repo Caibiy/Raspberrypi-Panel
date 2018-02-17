@@ -4,11 +4,15 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const { exec } = require('child_process')
 const pug = require('pug')
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
 //api design
 app.post('/api/user',(req,res)=>{
  res.json({user:"root"});
+})
+app.post('/api/config',(req,res)=>{
+res.json({flag:req.body.flag});
 })
 app.get('/',(req,res)=>{
 res.sendfile(path.join(__dirname,'index.html'))

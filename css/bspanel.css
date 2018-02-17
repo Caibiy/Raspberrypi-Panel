@@ -279,14 +279,17 @@ animation-name:fade;
    opacity:1;
   }
 }
-
-.content-panel{
+.panel_current{
+ display:block!important; 
+}
+#wifi_panel{
 display:none;
 margin-top:16px;
 }
-.content-panel ul{
+.wifi_panel ul{
 list-style:none
 }
+/*End*/
 .content__inner {
 	width: 100%;
 	height: 100vh;
