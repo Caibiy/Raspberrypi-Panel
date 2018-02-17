@@ -307,6 +307,20 @@ margin-top:16px;
 #wifi_panel ul{
 list-style:none
 }
+#magic_panel{
+display:none;
+margin-top:16px;
+}
+#magic_panel ul{
+list-style:none
+}
+#bluetooth_panel{
+display:none;
+margin-top:16px;
+}
+#bluetooth_panel ul{
+list-style:none
+}
 /*End*/
 .content__inner {
 	width: 100%;

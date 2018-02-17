@@ -55,24 +55,26 @@ $(_).addClass('current');
          if(result && result.flag){
          // swal('Fuck yourself!') 
          if( "wifi"==result.flag){
+  if($('#panels').children('.panel').hasClass('panel_current')){
+        $('.panel_current').css('transition','opacity 0.5s ease-in-out');
           $('.panel').removeClass('panel_current')
+}
           $('#wifi_panel').addClass('panel_current')
          }else if ("magic"==result.flag){
-        if($('#panels').children('.panel').hasClass('panel_current')){
-        /* -webkit-transition: opacity 3s ease-in-out;
-    -moz-transition: opacity 3s ease-in-out;
-    -ms-transition: opacity 3s ease-in-out;
-    -o-transition: opacity 3s ease-in-out;*/
+//魔镜      
+  if($('#panels').children('.panel').hasClass('panel_current')){
         $('.panel_current').css('transition','opacity 0.5s ease-in-out');
-        setTimeout(function(){
           $('.panel').removeClass('panel_current')
-        },500);
 }
+          $('#magic_panel').addClass('panel_current')
          }else if ("bluetooth"==result.flag){
+//蓝牙        
+if($('#panels').children('.panel').hasClass('panel_current')){
+        $('.panel_current').css('transition','opacity 0.5s ease-in-out');
           $('.panel').removeClass('panel_current')
-  	 } 
-            
-
+        } 
+          $('#bluetooth_panel').addClass('panel_current')
+}
       }
        }
      }) 
@@ -170,9 +172,19 @@ $(_).addClass('current');
                  <div id="panels">
                       <div class="panel"  id="wifi_panel">
                         <ul>
-                          <li>您当前的wifi状态为:</li>
-                          <li>可用的wifi列表如下:</li>
+                          <li>您当前的wifi状态:</li>
+                          <li>可用的wifi列表:</li>
                         </ul>
+                      </div>
+                      <div class="panel" id="magic_panel">
+                         <ul>
+                            <li>您当前魔镜状态:</li>
+                         </ul>
+                      </div>
+                      <div class="panel" id="bluetooth_panel">
+                         <ul>
+                           <li>您当前蓝牙状态:</li>
+                         </ul>
                       </div>
                  </div> 
 </div>

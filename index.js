@@ -12,6 +12,11 @@ app.post('/api/user',(req,res)=>{
  res.json({user:"root"});
 })
 app.post('/api/config',(req,res)=>{
+var flag=req.body.flag;
+if(flag=='wifi')
+{
+  
+}
 res.json({flag:req.body.flag});
 })
 app.get('/',(req,res)=>{
