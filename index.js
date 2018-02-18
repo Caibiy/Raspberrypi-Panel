@@ -21,7 +21,12 @@ exec('sh ./raspi/magic_status.sh',(err,stdout,stderr)=>{
    if(err){
     res.json({"err":err})
    }
-   res.json({"flag":"magic","data":{"type":1,"status":stdout}});
+   if(stdout.indexOf("正在运行")==0){
+      res.json({"flag":"magic","data":{"type":1,"status":stdout}});
+   }else{
+      console.log(stdout)
+      res.json({"flag":"magic","data":{"type":0,"status":stdout}});
+    }
 })
 }else{
  res.json({"flag":flag});

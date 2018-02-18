@@ -70,8 +70,10 @@ $(_).addClass('current');
     if(result.data && result.data.status){
          $('.magic_status:first').html(result.data.status+"<a style='color:red' target='_blank' href='http://localhost:8080/'>访问魔镜</a>")
          if(1==result.data.type){
-          $(".magic_start").css('display','none')  
+          $(".magic_start").css('display','none')
+          $(".magic_stop").css('display','block')  
          }else{
+          $(".magic_start").css('display','block')
           $(".magic_stop").css('display','none')
          }
        }
@@ -89,6 +91,15 @@ if($('#panels').children('.panel').hasClass('panel_current')){
 })
 
 }
+//启动魔镜
+function startMagic(){
+  swal('魔镜正在启动...')
+}
+//停止魔镜
+function stopMagic(){
+  swal('魔镜正在停止...')
+}
+//
 </script>
 </head>
 <body class="bspanel loading">
@@ -187,8 +198,8 @@ if($('#panels').children('.panel').hasClass('panel_current')){
                       <div class="panel" id="magic_panel">
                          <ul>
                             <li>您当前魔镜状态:<span class="magic_status"></span></li>
-                            <li class="magic_start"><a class="btn btn-primary btn-sm" href="#">启动魔镜</a></li>
-                            <li class="magic_stop"><a class="btn btn-danger btn-sm" href="#">停止魔镜</a></li>
+                            <li class="magic_start"><a class="btn btn-primary btn-sm" href="#" onclick="startMagic()" >启动魔镜</a></li>
+                            <li class="magic_stop"><a class="btn btn-danger btn-sm" href="#" onclick="stopMagic()">停止魔镜</a></li>
                          </ul>
                       </div>
                       <div class="panel" id="bluetooth_panel">
