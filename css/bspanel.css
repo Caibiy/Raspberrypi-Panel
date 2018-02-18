@@ -300,6 +300,9 @@ color:#fff!important;
  animation:fade-in;
  animation-duration:0.5s;
 }
+.panel ul li {
+margin-top:12px;
+}
 #wifi_panel{
 display:none;
 margin-top:16px;

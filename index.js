@@ -16,10 +16,18 @@ app.post('/api/config',(req,res)=>{
 var flag=req.body.flag;
 if(flag=='magic')
 {
-  
-}
-res.json({flag:req.body.flag});
+//得到当前魔镜的状态     
+exec('sh ./raspi/magic_status.sh',(err,stdout,stderr)=>{
+   if(err){
+    res.json({"err":err})
+   }
+   res.json({"flag":"magic","data":{"type":1,"status":stdout}});
 })
+}else{
+ res.json({"flag":flag});
+}
+})
+
 app.get('/',(req,res)=>{
 res.sendfile(path.join(__dirname,'index.html'))
 })

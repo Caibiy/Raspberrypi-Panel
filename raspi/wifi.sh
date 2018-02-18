@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 path=/etc/wpa_supplicant/wpa_supplicant.conf
 wifiname=$1
 wifipass=$2
