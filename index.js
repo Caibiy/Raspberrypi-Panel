@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const { exec } = require('child_process')
 const pug = require('pug')
+const port = 8001
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
@@ -13,7 +14,7 @@ app.post('/api/user',(req,res)=>{
 })
 app.post('/api/config',(req,res)=>{
 var flag=req.body.flag;
-if(flag=='wifi')
+if(flag=='magic')
 {
   
 }
@@ -62,8 +63,8 @@ app.get('/api/wifi',(req,res)=>{
     res.json(callback(err,stdout,stderr));
 })
 })
-app.listen(8080,()=>{
-console.log("Server is running on port: 8080")
+app.listen(port,()=>{
+console.log("Server is running on port:"+port)
 })
 
 function callback(err,stdout,stderr,spar="\n"){
