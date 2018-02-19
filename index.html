@@ -53,14 +53,19 @@ $(_).addClass('current');
        url:"/api/config",
        success:function(result){
          if(result && result.flag){
-         // swal('Fuck yourself!') 
+         // swal('Fuck yourself!')
+//wifi
          if( "wifi"==result.flag){
   if($('#panels').children('.panel').hasClass('panel_current')){
         $('.panel_current').css('transition','opacity 0.5s ease-in-out');
           $('.panel').removeClass('panel_current')
 }
           $('#wifi_panel').addClass('panel_current')
-         }else if ("magic"==result.flag){
+        if(result.data){
+          $('.wifi_info:first').text(result.data.info)
+          $('.wifi_list:first').text(result.data.wifis)
+       }        
+ }else if ("magic"==result.flag){
 //魔镜
   if($('#panels').children('.panel').hasClass('panel_current')){
         $('.panel_current').css('transition','opacity 0.5s ease-in-out');
@@ -191,8 +196,8 @@ function stopMagic(){
                  <div id="panels">
                       <div class="panel"  id="wifi_panel">
                         <ul>
-                          <li>您当前的wifi状态:</li>
-                          <li>可用的wifi列表:</li>
+                          <li>wifi信息:<span class="wifi_info"></span></li>
+                          <li>可用的wifi列表:<br><span class="wifi_list"></span></li>
                         </ul>
                       </div>
                       <div class="panel" id="magic_panel">
