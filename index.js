@@ -28,12 +28,13 @@ exec('sh ./raspi/magic_status.sh',(err,stdout,stderr)=>{
     }
 })
 }else if(flag=='wifi'){
-  //查询当前可用的wifi 
+  //查询wifi状态可当前可用wifi 
   exec('sh ./raspi/wifi_scan.sh',(err,stdout,stderr)=>{
     if(err){
       res.json({"err":err})
      }
-    res.json({"flag":"wifi","data":JSON.parse(stdout)})
+    console.log(stdout)
+    res.json({"flag":"wifi","data":eval('('+stdout+')')})
   })
 }
 else{

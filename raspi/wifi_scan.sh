@@ -9,7 +9,7 @@ do
    wifi_list="$wifi,$wifi_list"
 done
 wifi_list=`echo $wifi_list |  sed 's/\(.*\),/\1/'`
-wifi_status=`ping -c4 google.com | grep 'received' | awk -F',' '{print $2}' | awk '{print $1}'`
+wifi_status=`ping -c4 baidu.com | grep 'received' | awk -F',' '{print $2}' | awk '{print $1}'`
 if [ 0 -eq $wifi_status ];then
    wifi_info="没有网络链接"
 else
