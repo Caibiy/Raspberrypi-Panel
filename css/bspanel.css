@@ -251,6 +251,15 @@ margin:0 auto;
 .my_content{
   display:flex;
 }
+.content_left{
+ flex-grow:2;
+ border:1px solid #ccc;
+}
+.content_right{
+margin-left:8px;
+border:1px solid #ccc;
+flex-grow:7;
+}
 .content-item{
  flex-grow:1;
 text-align:center;
