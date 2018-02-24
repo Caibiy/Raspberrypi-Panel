@@ -2,7 +2,8 @@
 树莓派面板
 正在开发中....
 - git clone https://github.com/Caibiy/BSPanel.git
-- node index.js
+- nodemon app.js
 - 访问http://localhost:8080
 
 ![Raspberry pi Panel](./screen.png)
+- 测试环境地址(非树莓派环境)http://123.60.17.5:8001/#
