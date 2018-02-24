@@ -43,7 +43,7 @@ else{
 })
 
 app.get('/',(req,res)=>{
-res.sendfile(path.join(__dirname,'index.html'))
+res.send(pug.renderFile("./view/index.pug"))
 })
 //Show progress status
 app.get('/api/ps',(req,res)=>{
