@@ -1,5 +1,5 @@
 /**
- * demo2.js
+ * demo3.js
  * http://www.codrops.com
  *
  * Licensed under the MIT license.
@@ -16,6 +16,8 @@
 	DOM.enter = document.querySelector('.enter');
 	charming(DOM.enter);
 	DOM.enterLetters = Array.from(DOM.enter.querySelectorAll('span'));
+	// Set the SVG transform origin.
+	DOM.shape.style.transformOrigin = '50% 0%';
 
 	const init = () => {
 		imagesLoaded(document.body, {background: true} , () => document.body.classList.remove('loading'));
@@ -32,16 +34,38 @@
 
 		anime({
 			targets: DOM.intro,
-			duration: 1500,
-			easing: 'easeInOutSine',
+			duration: 1600,
+			easing: 'easeInOutCubic',
 			translateY: '-200vh'
 		});
 
 		anime({
+			targets: DOM.shape,
+			easing: 'easeInOutCubic',
+			scaleY: [
+				{value: [0,1], duration: 800},
+				{value: 0, duration: 1200, easing: 'easeOutElastic', elasticity: 700}
+			]
+		});
+
+		anime({
 			targets: DOM.path,
-			duration: 1500,
-			easing: 'easeInOutSine',
+			duration: 800,
+			easing: 'easeInOutQuad',
 			d: DOM.path.getAttribute('pathdata:id')
+		});
+
+		anime({
+			targets: [DOM.intro.querySelector('.content__inner'), DOM.shape],
+			duration: 1300,
+			easing: 'linear',
+			backgroundColor: (t,i) => {
+				console.log('here')
+				if ( i === 0 ) return '#fff1fb';
+			},
+			fill: (t,i) => {
+				if ( i === 1 ) return '#fff1fb';
+			}
 		});
 	};
 
@@ -63,7 +87,7 @@
 				{value: 1, duration: 150, easing: 'linear'}
 			],
 			color: {
-				value: '#002068',
+				value: '#ffffff',
 				duration: 1,
 				delay: (t,i,l) => i*15+150
 			}
@@ -88,7 +112,7 @@
 				{value: 1, duration: 150, easing: 'linear'}
 			],
 			color: {
-				value: '#ecec11',
+				value: '#f470d2',
 				duration: 1,
 				delay: (t,i,l) => (l-i-1)*15+150
 			}
