@@ -1,12 +1,5 @@
 /**
- * demo3.js
- * http://www.codrops.com
  *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2017, Codrops
- * http://www.codrops.com
  */
 {
 	const DOM = {};
@@ -60,7 +53,6 @@
 			duration: 1300,
 			easing: 'linear',
 			backgroundColor: (t,i) => {
-				console.log('here')
 				if ( i === 0 ) return '#fff1fb';
 			},
 			fill: (t,i) => {
