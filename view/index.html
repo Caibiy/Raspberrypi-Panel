@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Chewy" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="css/bspanel.css" />
+	<link rel="stylesheet" type="text/css" href="css/basic.css" />
 <link rel="stylesheet" type="text/css" href="./css/fontawesome-all.min.css"/>		
 <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" >
 <script>document.documentElement.className = 'js';</script>
@@ -106,7 +107,21 @@ function startMagic(){
 function stopMagic(){
   swal('魔镜正在停止...')
 }
-//
+//左侧导航事件
+$(function(){
+
+  $('.content_left ul li').click(function(){ 
+    for(var i=0;i<$('.content_left ul li').size();i++){
+     if(this==$('.content_left ul li').get(i)){
+     $('.content_left ul li').eq(i).children('a').addClass('hover');
+     $('#lanPos').css('top',i*40+10+'px')
+     }else{
+      $('.content_left ul li ').eq(i).children('a').removeClass('hover');
+    }
+  
+    }
+})
+})
 </script>
 </head>
 <body class="bspanel loading">
@@ -164,7 +179,7 @@ function stopMagic(){
 				<div class="content__inner">
 					<h2 class="content__title">The Raspberry pi Panel</h2>
 					<h3 class="content__subtitle">树莓派面板</h3>
-					<a href="#" class="enter">enter</a>
+					<a  class="enter">enter</a>
 				</div>
 				
 				<div class="shape-wrap">
@@ -215,16 +230,16 @@ function stopMagic(){
                          </ul>
                       </div>
                  </div>
-          <div>知识库</div> 
              <div class="my_content">
                    <div class="content_left">
                       <ul>
-                        <li></li>
-                         
+                        <li><a class="hover" flag="sysinfo">系统信息</a></li>
+                        <li><a flag="psinfo">进程信息</a></li>
+                        <div id="lanPos" style="top:10px"></div>
                      </ul> 
                    </div>
                    <div class="content_right">
-                      内存
+                      aaa
                    </div>
             </div> 
 </div>
