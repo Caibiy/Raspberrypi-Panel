@@ -8,7 +8,7 @@ echo -e "\033[0;32m******************************\033[0m"
 #add anything
 git add .
 #
-msg="rebuild project `date`&practice"
+msg="rebuild project `date`"
 if [ $# -eq 1 ] 
 then
     msg=$1
