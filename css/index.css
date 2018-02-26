@@ -248,6 +248,10 @@ margin:0 auto;
 }
 .my_content{
   display:flex;
+  margin-top:16px;
+}
+.my_content:first-child{
+margin-top:0;
 }
 .content_left ul{
   width:180px;

@@ -8,7 +8,7 @@
 	<meta name="author" content="JiadongYang" />
 	<link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Chewy" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/bspanel.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
 	<link rel="stylesheet" type="text/css" href="css/basic.css" />
 <link rel="stylesheet" type="text/css" href="./css/fontawesome-all.min.css"/>		
 <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" >
@@ -65,7 +65,13 @@ $(_).addClass('current');
         if(result.data){
            console.log(result.data);
           $('.wifi_info:first').text(result.data.info)
-          $('.wifi_list:first').text(result.data.wifis)
+          var wifis=result.data.wifis;
+          var str="<ul>";
+          for(var i=0;i<wifis.length;i++){
+           str+="<li>"+wifis[i]+"<span>连接</span></li>"
+          }
+         str+="</ul>"
+          $('.wifi_list:first').html(str)
        }        
  }else if ("magic"==result.flag){
 //魔镜

@@ -33,8 +33,8 @@ exec('sh ./raspi/magic_status.sh',(err,stdout,stderr)=>{
     if(err){
       res.json({"err":err})
      }
-    console.log(stdout)
-    res.json({"flag":"wifi","data":eval('('+stdout+')')})
+     var res2Json=eval('('+stdout+')'); 
+    res.json({"flag":"wifi","data":{"wifis":res2Json["wifis"].split(","),"info":res2Json["info"]}})
   })
 }
 else{
@@ -44,40 +44,6 @@ else{
 
 app.get('/',(req,res)=>{
    res.sendfile(path.join(__dirname,'./view/index.html'))
-})
-//Show progress status
-app.get('/api/ps',(req,res)=>{
-  exec('sh ./bin/ps.sh',(err,stdout,stderr)=>{
-  res.json(callback(err,stdout,stderr));
-})
-})
-//Show current OS user
-app.get('/api/user',(req,res)=>{
-exec('sh ./bin/user.sh',(error,stdout,stderr)=>{
-    res.send(pug.renderFile("./view/user.pug",callback(error,stdout,stderr)))
-})
-})
-//Show current directory of file
-app.get('/api/ls',(req,res)=>{
- exec('sh ./bin/ls.sh',(error,stdout,stderr)=>{
- res.json(callback(error,stdout,stderr));
-})
-})
-//Show Dir status
-app.get('/api/dstatus',(req,res)=>{
-exec('bash ./bin/dstatus.sh',(error,stdout,stderr)=>{
-  res.json(callback(error,stdout,stderr));
-})
-})
-//显示文件在磁盘中的占用率
-app.get('/api/fstatus',(req,res)=>{
-if(req.query){
-exec("sh ./bin/fstatus.sh "+req.query.file,(error,stdout,stderr)=>{
-res.json(callback(error,stdout,stderr));
-})
-}else{
-res.json({"eror":"没有传递参数"})
-}
 })
 //查询当前wifi是否已经配置
 app.get('/api/wifi',(req,res)=>{
