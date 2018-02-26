@@ -68,8 +68,9 @@ $(_).addClass('current');
           var wifis=result.data.wifis;
           var str="<ul>";
           for(var i=0;i<wifis.length;i++){
+           if(wifis[i]){
            str+="<li>"+wifis[i]+"<span>连接</span></li>"
-          }
+          }}
          str+="</ul>"
           $('.wifi_list:first').html(str)
        }        
@@ -198,19 +199,19 @@ $(function(){
 			<div class="my_container">	
                                <div class="my_content">
 				<div class="content-item">
-                                 <a href="#" class="item_a" flag="wifi">
+                                 <a  class="item_a" flag="wifi">
                                   <i class="fas fa-wifi fa-lg"></i>
                                         wifi配置
                                  </a>
                                  </div>						
                                 <div class="content-item">
-                                 <a href="#" class="item_a" flag="magic">
+                                 <a  class="item_a" flag="magic">
                                   <i class="fas fa-magic fa-lg"></i>
                                 魔镜配置
                                 </a>
                                  </div>
                                 <div class="content-item">
-                                 <a href="#" class="item_a" flag="bluetooth">
+                                 <a  class="item_a" flag="bluetooth">
                                   <i class="fab fa-bluetooth fa-lg"></i>
                                 蓝牙配置
                                </a>
