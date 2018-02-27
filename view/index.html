@@ -66,10 +66,13 @@ $(_).addClass('current');
            console.log(result.data);
           $('.wifi_info:first').text(result.data.info)
           var wifis=result.data.wifis;
-          var str="<ul>";
+          var str="<ul class=\"wifilist\">";
           for(var i=0;i<wifis.length;i++){
+           if(i==5){
+           break; 
+           }
            if(wifis[i]){
-           str+="<li>"+wifis[i]+"<span>连接</span></li>"
+           str+="<li class=\"wifi_item\">"+wifis[i]+"<span class=\"btn btn-success btn-sm \">连接</span></li>"
           }}
          str+="</ul>"
           $('.wifi_list:first').html(str)
@@ -199,6 +202,14 @@ $(function(){
 			<div class="my_container">	
                                <div class="my_content">
 				<div class="content-item">
+                                 <a  class="item_a" flag="system">
+                                  <i class="fas fa-wrench fa-lg"></i>
+                                 系统信息
+                                 </a>
+                                 </div>						
+                            </div>
+                               <div class="my_content">
+				<div class="content-item">
                                  <a  class="item_a" flag="wifi">
                                   <i class="fas fa-wifi fa-lg"></i>
                                         wifi配置
@@ -221,7 +232,7 @@ $(function(){
                       <div class="panel"  id="wifi_panel">
                         <ul>
                           <li>wifi信息:<span class="wifi_info"></span></li>
-                          <li>可用的wifi列表:<br><span class="wifi_list"></span></li>
+                          <li>可用的wifi列表:(最多显示5条)<br><span class="wifi_list"></span></li>
                         </ul>
                       </div>
                       <div class="panel" id="magic_panel">

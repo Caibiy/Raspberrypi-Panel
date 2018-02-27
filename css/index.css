@@ -248,7 +248,14 @@ margin:0 auto;
 }
 .my_content{
   display:flex;
-  margin-top:16px;
+}
+.wifi_item{
+border-bottom:1px solid #ccc;
+overflow:auto;
+}
+.wifi_item .btn{
+float:right;
+top:-5px;
 }
 .my_content:first-child{
 margin-top:0;
@@ -276,6 +283,7 @@ margin-top:0;
 .content_left ul li a:hover{
   color:#FF5F3E;
   text-decoration:none;
+  cursor:pointer;
 }
 .content_left ul li a.hover{
  color:#FF5F3E;
@@ -301,6 +309,9 @@ flex-grow:1;
 text-align:center;
 box-shadow:0 0 1em #d2d2d2;
 margin-top:8px
+}
+.content-item:hover{
+cursor:pointer;
 }
 .content-item a.current{
  background-color:blueviolet;
