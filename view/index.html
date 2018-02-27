@@ -63,15 +63,17 @@ $(_).addClass('current');
 }
           $('#wifi_panel').addClass('panel_current')
         if(result.data){
-           console.log(result.data);
-          $('.wifi_info:first').text(result.data.info)
+         var info=result.data.info; 
           var wifis=result.data.wifis;
           var str="<ul class=\"wifilist\">";
+          str+="<li class=\"wifi_item\">"+info+"<span class=\"btn btn-danger btn-sm\">断开</span></li>";
+         $('.wifi_info:first').html(str);
+          str="<ul class=\"wifilist\">";
           for(var i=0;i<wifis.length;i++){
            if(i==5){
            break; 
            }
-           if(wifis[i]){
+           if(wifis[i].length>1){
            str+="<li class=\"wifi_item\">"+wifis[i]+"<span class=\"btn btn-success btn-sm \">连接</span></li>"
           }}
          str+="</ul>"
