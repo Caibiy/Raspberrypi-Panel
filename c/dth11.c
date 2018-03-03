@@ -1,76 +1,82 @@
-nclude <wiringPi.h>
+#include <wiringPi.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#define MAXTIMINGS	85
-#define DHTPIN		21
-int dht11_dat[5] = { 0, 0, 0, 0, 0 };
- 
-void read_dht11_dat()
+typedef unsigned char uint8;
+typedef unsigned int uint16;
+typedef unsigned long uint32;
+#define HIGH_TIME 32
+int pinNumber = 21; //use gpio1 to read data
+uint32 databuf;
+
+uint8 readSensorData(void)
 {
-	uint8_t laststate	= HIGH;
-	uint8_t counter		= 0;
-	uint8_t j		= 0, i;
-	float	f; 
- 
-	dht11_dat[0] = dht11_dat[1] = dht11_dat[2] = dht11_dat[3] = dht11_dat[4] = 0;
- 
-	pinMode( DHTPIN, OUTPUT );
-	digitalWrite( DHTPIN, LOW );
-	delay( 18 );
-	digitalWrite( DHTPIN, HIGH );
-	delayMicroseconds( 40 );
-	pinMode( DHTPIN, INPUT );
- 
-	for ( i = 0; i < MAXTIMINGS; i++ )
-	{
-		counter = 0;
-		while ( digitalRead( DHTPIN ) == laststate )
-		{
-			counter++;
-			delayMicroseconds( 1 );
-			if ( counter == 255 )
-			{
-				break;
-			}
-		}
-		laststate = digitalRead( DHTPIN );
- 
-		if ( counter == 255 )
-			break;
- 
-		if ( (i >= 4) && (i % 2 == 0) )
-		{
-			dht11_dat[j / 8] <<= 1;
-			if ( counter > 16 )
-				dht11_dat[j / 8] |= 1;
-			j++;
-		}
-	}
- 
-	if ( (j >= 40) &&
-	     (dht11_dat[4] == ( (dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3]) & 0xFF) ) )
-	{
-		f = dht11_dat[2] * 9. / 5. + 32;
-		printf( "Humidity = %d.%d %% Temperature = %d.%d C (%.1f F)\n",
-			dht11_dat[0], dht11_dat[1], dht11_dat[2], dht11_dat[3], f );
-	}else  {
-		printf( "Data not good, skip\n" );
-	}
+uint8 crc;
+uint8 i;
+pinMode(pinNumber,OUTPUT); // set mode to output
+digitalWrite(pinNumber, 0); // output a high level
+delay(25);
+digitalWrite(pinNumber, 1); // output a low level
+pinMode(pinNumber, INPUT); // set mode to input
+pullUpDnControl(pinNumber,PUD_UP);
+delayMicroseconds(27);
+if(digitalRead(pinNumber)==0) //SENSOR ANS
+{
+while(!digitalRead(pinNumber)); //wait to high
+for(i=0;i<32;i++)
+{
+while(digitalRead(pinNumber)); //data clock start
+while(!digitalRead(pinNumber)); //data start
+delayMicroseconds(HIGH_TIME);
+databuf*=2;
+if(digitalRead(pinNumber)==1) //1
+{
+databuf++;
 }
- 
-int main( void )
+}
+for(i=0;i<8;i++)
 {
-	printf( "Raspberry Pi wiringPi DHT11 Temperature test program\n" );
- 
-	if ( wiringPiSetup() == -1 )
-		exit( 1 );
- 
-	while ( 1 )
-	{
-		read_dht11_dat();
-		delay( 1000 ); 
-	}
- 
-	return(0);
+while(digitalRead(pinNumber)); //data clock start
+while(!digitalRead(pinNumber)); //data start
+delayMicroseconds(HIGH_TIME);
+crc*=2;
+if(digitalRead(pinNumber)==1) //1
+{
+crc++;
+}
+}
+return 1;
+}
+else
+{
+return 0;
+}
+}
+int main (void)
+{
+printf("Use GPIO1 to read data!\n");
+if (-1 == wiringPiSetup()) {
+printf("Setup wiringPi failed!");
+return 1;
+}
+pinMode(pinNumber, OUTPUT); // set mode to output
+digitalWrite(pinNumber, 1); // output a high level
+printf("Enter OS-------\n");
+while(1) {
+pinMode(pinNumber,OUTPUT); // set mode to output
+digitalWrite(pinNumber, 1); // output a high level
+delay(3000);
+if(readSensorData())
+{
+printf("Congratulations ! Sensor data read ok!\n");
+printf("RH:%d.%d\n",(databuf>>24)&0xff,(databuf>>16)&0xff);
+printf("TMP:%d.%d\n",(databuf>>8)&0xff,databuf&0xff);
+databuf=0;
+}
+else
+{
+printf("Sorry! Sensor dosent ans!\n");
+databuf=0;
+}
+}
+return 0;
 }
