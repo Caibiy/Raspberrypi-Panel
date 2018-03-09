@@ -132,6 +132,16 @@ $(function(){
     }
   
     }
+ var flag=$(this).attr('flag');
+$.ajax({
+    type:"post",
+    data:{flag:flag},
+    url:"/api/info",
+    success:function(result){
+    $('.content_right')[0].text(result);
+
+   }}
+})
 })
 })
 </script>

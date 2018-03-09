@@ -8,10 +8,11 @@ const port = 8001
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
-//api design
-app.post('/api/user',(req,res)=>{
- res.json({user:"root"});
+//信息相关接口
+app.post('/api/info',(req,res)=>{
+res.json({"info":req.body.flag})
 })
+//配置相关接口
 app.post('/api/config',(req,res)=>{
 var flag=req.body.flag;
 if(flag=='magic')
