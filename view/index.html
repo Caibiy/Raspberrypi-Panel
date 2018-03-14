@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 	<meta charset="UTF-8" />
@@ -30,6 +29,15 @@ text-decoration:none;
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript">
 window.onload=function(){
+
+$.ajax({
+    type:"post",
+    data:{flag:"sysinfo"},
+    url:"/api/info",
+    success:function(result){
+   $('.content_right pre').text(result.data); 
+ }
+})
 var colors =["#5FB878","#1E9FFF","#F7B824","#FF5722","#FFBBFF","#D1EEEE",
 "#CAE1FF","#C1FFC1","#BFEFFF","#BA55D3","#708090","#32CD32","#080808"]
 var fars=document.getElementsByClassName('far');
@@ -138,9 +146,8 @@ $.ajax({
     data:{flag:flag},
     url:"/api/info",
     success:function(result){
-    $('.content_right')[0].text(result);
-
-   }}
+   $('.content_right pre').text(result.data); 
+ }
 })
 })
 })
@@ -263,13 +270,13 @@ $.ajax({
              <div class="my_content">
                    <div class="content_left">
                       <ul>
-                        <li><a class="hover" flag="sysinfo">系统信息</a></li>
-                        <li><a flag="psinfo">进程信息</a></li>
+                        <li flag="sysinfo"><a class="hover">系统信息</a></li>
+                        <li flag="psinfo"><a>进程信息</a></li>
                         <div id="lanPos" style="top:10px"></div>
                      </ul> 
                    </div>
                    <div class="content_right">
-                      aaa
+                      <pre></pre>
                    </div>
             </div> 
 </div>
@@ -287,7 +294,3 @@ $.ajax({
 		</main>
 	</body>
 </html>
-<!DOCTYPE html>
-<!DOCTYPE html>
-
-<!DOCTYPE html>

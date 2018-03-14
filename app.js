@@ -10,7 +10,15 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
 //信息相关接口
 app.post('/api/info',(req,res)=>{
-res.json({"info":req.body.flag})
+var flag=req.body.flag;
+if("psinfo"==flag){
+  exec("top -b -n 1 | head -n 30  | tail -n 30",(err,stdout,stderr)=>{
+  res.json({"data":stdout});}
+)}else if ("sysinfo"==flag){
+  exec("uname -a",(err,stdout,stderr)=>{
+  res.json({"data":stdout});
+})
+}
 })
 //配置相关接口
 app.post('/api/config',(req,res)=>{
