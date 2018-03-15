@@ -30,6 +30,7 @@ text-decoration:none;
 <script type="text/javascript">
 window.onload=function(){
 
+console.log(window.location.hostname+"xxxxxxxxxxxxxx");
 $.ajax({
     type:"post",
     data:{flag:"sysinfo"},
@@ -95,7 +96,7 @@ $(_).addClass('current');
 }
           $('#magic_panel').addClass('panel_current')
     if(result.data && result.data.status){
-         $('.magic_status:first').html(result.data.status+"<a style='color:red' target='_blank' href='http://localhost:8080/'>访问魔镜</a>")
+         $('.magic_status:first').html(result.data.status+"<a style='color:red' target='_blank' href='http://"+window.location.hostname+":8080'>访问魔镜</a>")
          if(1==result.data.type){
           $(".magic_start").css('display','none')
           $(".magic_stop").css('display','block')  
@@ -126,6 +127,9 @@ function startMagic(){
 //停止魔镜
 function stopMagic(){
   swal('魔镜正在停止...')
+}
+function hostname(){
+return window.location.hostname+":8080"
 }
 //左侧导航事件
 $(function(){

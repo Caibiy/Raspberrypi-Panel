@@ -17,12 +17,22 @@ check_sys(){
   fi
 }
 
+#检查端口是否已经被使用
+check_port(){
+    if lsof -Pi :8080 -sTCP:LISTEN -t >dev/null;then
+        curr_port="1"
+    else
+        curr_port="0"
+    fi
+}
+
 #每次运行前先清除log
 if [ -f $log ];then
   rm ../log/magic.log
 fi
 check_root
 check_sys
+check_port
 if [[ ${sys_info} == "raspbian" ]];then
  if [ ! -d $dir ];then
     if [ -e $file ];then 

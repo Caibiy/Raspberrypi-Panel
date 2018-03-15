@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const { exec } = require('child_process')
 const pug = require('pug')
 const port = 8001
+const test = require('./model/port')
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
@@ -15,9 +16,7 @@ if("psinfo"==flag){
   exec("top -b -n 1 | head -n 30  | tail -n 30",(err,stdout,stderr)=>{
   res.json({"data":stdout});}
 )}else if ("sysinfo"==flag){
-  exec("uname -a",(err,stdout,stderr)=>{
-  res.json({"data":stdout});
-})
+  res.json(test.getPort())
 }
 })
 //配置相关接口
