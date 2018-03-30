@@ -5,6 +5,7 @@ __author__ = 'Caibiy'
 
 import Adafruit_DHT,os,time,datetime,sqlite3
 conn,cursor=(None,None)
+
 #初始化数据库
 def initDb():
 	global conn,cursor
@@ -49,10 +50,15 @@ class usbCamera(object):
 	def takePhoto(self):
 		nowTime = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 		os.system('fswebcam  -r 1280x720 --no-banner ../img/%s.jpg' % nowTime)
-		executeDb('insert into pic (time) VALUES (%s)'% nowTime)
+		executeDb('insert into pic (time) VALUES (\'%s\') ' %  nowTime)
 def init():
+	os.system('bash ./check.sh')
 	s = smartHome(23,11,21)
 	initDb()
+	#uc = usbCamera()
+	#uc.takePhoto()	
+	cursor.execute('select * from pic')
+	print(cursor.fetchall())
 
 if __name__ =='__main__':
 	init()
