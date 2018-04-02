@@ -5,6 +5,12 @@ __author__ = 'Caibiy'
 
 import Adafruit_DHT,os,time,datetime,sqlite3
 conn,cursor=(None,None)
+#gpio
+@unique
+class gpio(Enum):
+	pdht11=1
+	pmq2=2
+	pbuzzer=3
 
 #初始化数据库
 def initDb():
@@ -25,6 +31,9 @@ def executeDb(sql):
 #主控包含传感器、蜂鸣器
 class smartHome(object):
 	sensor = Adafruit_DHT.DHT11
+	@property
+	def sensor(self):
+		return self.sensor
 	def __init__(self,pdht11,pmq2,pbuzzer):
 		self.__pdht11 = pdht11
 		self.__pmq2 = pmq2
