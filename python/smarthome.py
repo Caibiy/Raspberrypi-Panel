@@ -72,7 +72,7 @@ class smartHome(object):
 			saveDth(temperature,humidity)
 			return (humidity,temperature)
 	def saveDth(self,temp,humidity):
-		executeDb('insert into dth (time) VALUES (\'%s\',\'%s\') ' %  (temp,humidity))
+		executeDb('insert into dth (id,temp,humidity) VALUES (\'%s\',\'%s\',\'%s\') ' %  (uuid.uudi1(),temp,humidity))
 		
 #USB摄像头
 class usbCamera(object):
@@ -83,7 +83,7 @@ class usbCamera(object):
 		os.system('fswebcam  -r 1280x720 --no-banner ../img/%s.jpg' % nowTime)
 		saveTime(nowTime)
 	def saveTime(self,time):
-		executeDb('insert into pic (time) VALUES (\'%s\') ' %  time)
+		executeDb('insert into pic (id,time) VALUES (\'%s\',\'%s\') ' %  (uuid.uuid1(),time))
 def init():
 	os.system('bash ./check.sh')
 	s = smartHome(23,11,21)
