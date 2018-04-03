@@ -85,9 +85,16 @@ class usbCamera(object):
 	def saveTime(self,time):
 		executeDb('insert into pic (id,time) VALUES (\'%s\',\'%s\') ' %  (uuid.uuid1(),time))
 def init():
+	global conn,cursor
 	os.system('bash ./check.sh')
-	s = smartHome(23,11,21)
+	s = smartHome()
 	initDb()
+	humidity,temperature=s.readDth()
+	if humidity is not None and temperature is not None:
+		if
+	#释放资源
+	conn.close()
+	cursor.close();
 	#uc = usbCamera()
 	#uc.takePhoto()	
 	
