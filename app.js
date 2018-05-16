@@ -5,7 +5,8 @@ const bodyParser = require('body-parser')
 const { exec } = require('child_process')
 const pug = require('pug')
 const port = 8001
-const test = require('./model/port')
+const ports = require('./model/port')
+const system = require('./model/system')
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname,'')))
@@ -16,7 +17,7 @@ if("psinfo"==flag){
   exec("top -b -n 1 | head -n 30  | tail -n 30",(err,stdout,stderr)=>{
   res.json({"data":stdout});}
 )}else if ("sysinfo"==flag){
-  res.json(test.getPort())
+  res.json(ports.getPort())
 }
 })
 //配置相关接口
@@ -36,14 +37,13 @@ exec('sh ./raspi/magic_status.sh',(err,stdout,stderr)=>{
     }
 })
 }else if(flag=='wifi'){
-  //查询wifi状态可当前可用wifi 
-  exec('sh ./raspi/wifi_scan.sh',(err,stdout,stderr)=>{
-    if(err){
-      res.json({"err":err})
-     }
-     var res2Json=eval('('+stdout+')'); 
-    res.json({"flag":"wifi","data":{"wifis":res2Json["wifis"].split(","),"info":res2Json["info"]}})
-  })
+  //查询wifi状态可当前可用wifi
+  var wifiresu = system.wifi();
+  if(wifiresu['success']==true){
+  res.json(system.wifi())
+  }else{
+  res.json(null)
+  } 
 }
 else{
  res.json({"flag":flag});
@@ -51,7 +51,11 @@ else{
 })
 
 app.get('/',(req,res)=>{
+
+console.log("Server is running on port:"+port)
+	console.log("/");
    res.sendfile(path.join(__dirname,'./view/index.html'))
+
 })
 //查询当前wifi是否已经配置
 app.get('/api/wifi',(req,res)=>{

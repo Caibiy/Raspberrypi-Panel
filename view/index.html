@@ -74,6 +74,7 @@ $(_).addClass('current');
         if(result.data){
          var info=result.data.info; 
           var wifis=result.data.wifis;
+          console.log(info+"----"+wifis);
           var str="<ul class=\"wifilist\">";
           str+="<li class=\"wifi_item\">"+info+"<span class=\"btn btn-danger btn-sm\">断开</span></li>";
          $('.wifi_info:first').html(str);

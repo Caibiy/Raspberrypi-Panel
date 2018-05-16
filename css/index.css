@@ -252,6 +252,7 @@ margin:0 auto;
 .wifi_item{
 border-bottom:1px solid #ccc;
 overflow:auto;
+padding-bottom:5px;
 }
 .wifi_item .btn{
 float:right;

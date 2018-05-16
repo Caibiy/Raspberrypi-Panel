@@ -1,5 +1,5 @@
 #!/bin/sh
-iwlist=`echo linux | sudo -S iwlist scanning 2>/dev/null | grep -i -E 'essid' | sed '{
+iwlist=`echo break | sudo -S iwlist scanning 2>/dev/null | grep -i -E 'essid' | sed '{
 s/[[:space:]]//g
 s/\"//g
 }' | gawk -F: '{print $2}'`
